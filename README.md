@@ -1,12 +1,14 @@
-# Install Volatility on a remote using Ansible
+# Install Volatility on a remote host using Ansible
 
-volatility is open source memory forensics platform which is used of incident response and malware analysis
+Volatility is open source memory forensics platform which is used of incident response and malware analysis.
+
+Ansible is a open source automation tool, that enables software provisioning, configuration management, application deployement functionality and etc.
 
 ## Prerequistes
 
 1. For this setup we need to have a controller and a host machine.
 2. Make sure anisble is installed on the controller.
-3. Make sure passwordless authentication is enable on remote hosts
+3. Make sure passwordless authentication is enabled on remote hosts.
 
 ## Installation
 
@@ -47,6 +49,7 @@ ubuntu@remotehost:~/.ssh$ vi authorized_keys
 now on controller server ssh to target server and it should authenticate without password.
 
 ## Ansible playbook to download and install Volatility2 on remote host
+Ansible playbooks are in written in YAML
 
 ```bash
 ---
