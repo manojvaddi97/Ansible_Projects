@@ -1,0 +1,70 @@
+    - name: Ensure group prometheus exists
+      ansible.builtin.group:
+        name: "{{ groupId }}"
+        state: present
+
+    - name: Creating Prometheus System User
+      ansible.builtin.user:
+        name: "{{ userId }}"
+        group: "{{ groupId }}"
+        system: yes
+        create_home: no
+        shell: /bin/false
+        state: present
+
+    - name: Create Prometheus Directories
+      ansible.builtin.file:
+        path: "{{ item.path }}"
+        state: directory
+        mode: "{{ item.mode | default('0755') }}"
+        recurse: "{{ item.recurse | default(false) }}"
+        owner: "{{ item.owner | default('prometheus') }}"
+        group: "{{ item.group | default('prometheus') }}"
+      loop:
+        - { path: '/etc/prometheus', mode: '0755' }
+        - { path: '/var/lib/prometheus', mode: '0755', recurse: true, owner: 'prometheus', group: 'prometheus' }
+
+    - name: Download Prometheus
+      ansible.builtin.unarchive:
+        src: "https://github.com/prometheus/prometheus/releases/download/v{{ version }}/prometheus-{{ version }}.linux-amd64.tar.gz"
+        dest: /tmp
+        remote_src: yes
+
+    - name: Move Prometheus Binaries and Configuration
+      ansible.builtin.shell: |
+        cd /tmp/prometheus-{{ version }}.linux-amd64
+        mv prometheus promtool /usr/local/bin/
+        mv consoles console_libraries prometheus.yml /etc/prometheus/
+        chown -R prometheus:prometheus /usr/local/bin/prometheus /usr/local/bin/promtool /etc/prometheus
+        chown -R prometheus:prometheus /etc/prometheus/consoles /etc/prometheus/console_libraries
+        chown -R prometheus:prometheus /var/lib/prometheus
+
+    - name: Copy Prometheus Configuration File
+      template:
+        src: prometheus.conf.j2
+        dest: /etc/prometheus/prometheus.conf
+
+    - name: Copy Alert Rules File
+      copy:
+        src: "{{ role_path }}/files/alertrules.yml"
+        dest: /etc/prometheus/alert.rules.yml
+
+    - name: Copy Prometheus systemd Service File
+      template:
+        src: init.service.j2
+        dest: /etc/systemd/system/prometheus.service
+      notify: systemd_reload
+
+    - name: Ensure Prometheus Service is Running and Enabled
+      ansible.builtin.systemd:
+        name: prometheus
+        state: started
+        enabled: yes
+
+    - name: Check that you can connect (GET) to Prometheus and it returns a status 200
+      ansible.builtin.uri:
+        url: http://localhost:9090
+        method: GET
+        return_content: yes
+        status_code: 200
+

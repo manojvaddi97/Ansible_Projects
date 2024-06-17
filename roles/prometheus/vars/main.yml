@@ -1,0 +1,9 @@
+---
+# vars file for prometheus
+
+serviceName: "prometheus"
+userId: "prometheus"
+groupId: "prometheus"
+exec_command: "/usr/local/bin/prometheus --config.file=/etc/prometheus/prometheus.conf --storage.tsdb.path=/var/lib/prometheus/ --storage.tsdb.retention=2d --web.console.templates=/etc/prometheus/consoles --web.console.libraries=/etc/prometheus/console_libraries"
+version: "2.52.0"
+host: "35.183.99.26"
