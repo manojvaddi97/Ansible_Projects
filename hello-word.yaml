@@ -1,0 +1,6 @@
+- name: print
+  hosts: web
+  tasks:
+  - name: print the statement
+    ansible.builtin.debug:
+      nsg: "Hello World!!"
