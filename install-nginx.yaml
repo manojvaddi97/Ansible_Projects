@@ -10,3 +10,7 @@
       ansible.builtin.service:
         name: nginx
         state: started
+    - name: Enable Nginx service
+      ansible.builtin.service:
+        name: nginx
+        enabled: yes
