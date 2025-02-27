@@ -6,8 +6,17 @@
     ansible.builtin.debug:
       msg: "Hello {{ person | default('Ramesh')}}"
 
-  - name: coberting string to list
+  - name: converting string to list
     vars:
       fruits: "apple, banana, orange"
     ansible.builtin.debug:
       msg: "Fruits are {{ fruits | split(',') }}"
+  - name: converting dictionary to list
+    vars:
+      course:
+        name: 'ansible'
+        duration: '10hrs'
+        trainer: 'sivakumar'
+    ansible.builtin.debug:
+      msg: "course details are {{ course | dict2items }}"
+  
