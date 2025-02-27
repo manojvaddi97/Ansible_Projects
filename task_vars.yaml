@@ -5,8 +5,10 @@
     GREET: "Play Variables"
   tasks:
   - name: print play variable
-    msg: "the message is {{ GREET }}"
+    ansible.builtin.debug:
+      msg: "the message is {{ GREET }}"
   - name: print task variable
     vars:
       GREET: "Task Variable"
-    msg: "the message is {{ GREET }}"
+    ansible.builtin.debug:
+      msg: "the message is {{ GREET }}"
