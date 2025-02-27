@@ -1,0 +1,16 @@
+- name : playbook to check variable preferences
+  hosts: local
+  connection: local
+  vars: # play level variables
+    GREET: "play"
+  vars_files: # variables referenced from file
+  - course.yaml
+  vars_prompt: # variables referenced from prompt
+    name: GREET
+    prompt: Enter the greeting
+  tasks:
+  - name: print the variable
+    vars:
+      GREET: "Task"
+    ansible.builtin.debug:
+      msg: "Greeting is {{ GREET }}"
