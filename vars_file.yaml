@@ -1,9 +1,8 @@
-- name: print variables from file
+- name: Referance variables from file
   hosts: local
   connection: local
-  vars_files: 
-  - course.yaml
+  vars_files:
+    - course.yaml
   tasks:
-  - name: print course information
-    ansible.builtin.debug:
-      msg: "Course is {{ COURSE }}, Duration is {{ DURATION }}, Trainer is {{ TRAINER }}"
+  ansible.builtin.debug:
+    msg: "The course is {{ COURSE }}, of duaration {{ DURATION }}, by trainer {{ TRAINER }}"

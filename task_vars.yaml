@@ -1,14 +1,14 @@
 - name: usage of variables
   hosts: local
   connection: local
-  vars:
+  vars: # variables can be referenced in the play
     GREET: "Play Variables"
   tasks:
   - name: print play variable
     ansible.builtin.debug:
       msg: "the message is {{ GREET }}"
   - name: print task variable
-    vars:
+    vars: # variables can only be referenced in the task
       GREET: "Task Variable"
     ansible.builtin.debug:
       msg: "the message is {{ GREET }}"
