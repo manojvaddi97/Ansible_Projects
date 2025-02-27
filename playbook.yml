@@ -1,6 +1,6 @@
 ---
 - hosts: prometheus
-  become: yes
+  become: true
   become_user: root
   become_method: sudo
   roles:

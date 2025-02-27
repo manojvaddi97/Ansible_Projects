@@ -1,17 +1,12 @@
-- name: Usage of variables
+- name: usage of variables
   hosts: local
   connection: local
-  vars: # play level variable, can be referred by all plays.
-    COURSE: "DEVOPS with AWS"
-    DURATION: 120HRS
-    TRAINER: "SIVA KUMAR"
+  vars:
+    GREET: "Play Variables"
   tasks:
-  - name: print the variables
-    vars: # TASK level variable, can only be referened in this particular task
-      COURSE: ANSIBLE
-    ansible.builtin.debug: #for debugging and to print the message
-      msg: "Course is {{ COURSE }} , Duration {{ DURATION }} and Trainer is {{ TRAINER }}"
-
-  - name: print the variables
-    ansible.builtin.debug: #for debugging and to print the message
-      msg: "Course is {{ COURSE }} , Duration {{ DURATION }} and Trainer is {{ TRAINER }}"
+  - name: print play variable
+    msg: "the message is {{ GREET }}"
+  - name: print task variable
+    vars:
+      GREET: "Task Variable"
+    msg: "the message is {{ GREET }}"
