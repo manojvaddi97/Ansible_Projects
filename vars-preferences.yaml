@@ -6,8 +6,8 @@
   # vars_files: # variables referenced from file
   # - course.yaml
   vars_prompt: # variables referenced from prompt
-    name: GREET
-    prompt: Enter the greeting
+    # name: GREET
+    # prompt: Enter the greeting
   tasks:
   - name: print the variable
     # vars:
