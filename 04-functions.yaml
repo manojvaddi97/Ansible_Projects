@@ -19,4 +19,13 @@
         trainer: 'sivakumar'
     ansible.builtin.debug:
       msg: "course details are {{ course | dict2items }}"
+  - name: converting list to dictionary
+    vars:
+      course:
+      - {'key': 'name', 'value': 'ansible'}
+      - {'key': 'duration', 'value': '10hrs'}
+      - {'key': 'trainer', 'value': 'sivakumar'}
+    ansible.builtin.debug:
+      msg: "course info {{ course | items2dict }}"
+
   
