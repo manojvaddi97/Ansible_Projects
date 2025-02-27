@@ -10,7 +10,7 @@
     prompt: Enter the greeting
   tasks:
   - name: print the variable
-    vars:
-      GREET: "Task"
+    # vars:
+    #   GREET: "Task"
     ansible.builtin.debug:
       msg: "Greeting is {{ GREET }}"
