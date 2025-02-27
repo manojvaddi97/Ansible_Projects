@@ -8,7 +8,7 @@
   tasks:
   - name: print the variables
     vars: # TASK level variable, can only be referened in this particular task
-    COURSE: ANSIBLE
+      COURSE: ANSIBLE
     ansible.builtin.debug: #for debugging and to print the message
       msg: "Course is {{ COURSE }} , Duration {{ DURATION }} and Trainer is {{ TRAINER }}"
 
