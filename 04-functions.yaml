@@ -1,0 +1,13 @@
+- name: functions
+  hosts: local
+  connection: local
+  tasks:
+  - name: using default function
+    ansible.builtin.debug:
+      msg: "Hello {{ person | default('Ramesh')}}"
+
+  - name: coberting string to list
+    vars:
+      fruits: "apple, banana, orange"
+    ansible.builtin.debug:
+      msg: "Fruits are {{ fruits | split(',') }}"
