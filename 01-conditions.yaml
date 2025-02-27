@@ -5,11 +5,11 @@
   - name: Install Nginx in RHEL
     ansible.builtin.dnf:
       name: nginx
-      state: Installed
+      state: installed
     when: ansible_os_family == "RedHat"
 
   - name: Install Nginx in ubuntu
     ansible.builtin.apt:
       name: nginx
-      state: Installed
+      state: installed
     when: ansible_os_family == "Debian"
