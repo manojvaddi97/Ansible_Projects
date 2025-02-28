@@ -2,6 +2,11 @@
   hosts: local
   connection: local
   tasks:
-  - name: execute ls command
-    #ansible.builtin.command: ls -ltr > /tmp/output.txt
+  - name: execute ls command using shell module
     ansible.builtin.shell: ls -ltr > /tmp/output.txt
+  - name: execute ls command using command module
+    ansible.builtin.command: ls -ltr
+    register: command_output
+  - name: print output
+    ansible.builtin.debug:
+      msg: "the command output is {{ command_output }}"
