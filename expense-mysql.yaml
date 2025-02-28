@@ -22,3 +22,10 @@
       login_user: root
       login_password: ExpenseApp@1
       login_host: mysqldb.manojvaddi.online
+      ignore_errors: true
+      register: mysql_info
+
+  - name: print mysql info
+    ansible.builtin.debug:
+      msg: "MYSQL info {{ mysql_info }}"
+ 
