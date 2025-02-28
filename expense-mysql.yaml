@@ -3,7 +3,7 @@
   become: yes
   tasks:
   - name: install mysql libraries
-    ansible.builtin.pio:
+    ansible.builtin.pip:
       name: "{{ item }}"
       executable: pip3.9
     loop:
